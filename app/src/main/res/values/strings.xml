@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">NoteKotlinMVP</string>
+    <string name="delete_notes_menu">Delete All</string>
 </resources>

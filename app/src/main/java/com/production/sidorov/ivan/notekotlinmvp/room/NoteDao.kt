@@ -3,6 +3,7 @@ package com.production.sidorov.ivan.notekotlinmvp.room
 import android.arch.persistence.room.*
 import android.arch.persistence.room.OnConflictStrategy.REPLACE
 import com.production.sidorov.ivan.notekotlinmvp.mvp.model.Note
+import io.reactivex.Single
 import java.util.*
 
 @Dao interface NoteDao{
@@ -22,8 +23,8 @@ import java.util.*
     @Query("UPDATE notes SET title = :arg1, text = :arg2, changed_at = :arg3 WHERE id = :arg0 ")
     fun updateNote(id: Long, title: String, text: String, modified: Date )
 
-    @Delete
-    fun deleteNote(note: Note)
+    @Query("DELETE FROM notes WHERE id = :arg0")
+    fun deleteNote(id: Long)
 
     @Query("delete from notes")
     fun deleteAllNotes()

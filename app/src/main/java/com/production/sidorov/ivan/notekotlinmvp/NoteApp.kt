@@ -1,7 +1,6 @@
 package com.production.sidorov.ivan.notekotlinmvp
 
 import android.app.Application
-import android.content.Context
 import com.production.sidorov.ivan.notekotlinmvp.di.component.AppComponent
 import com.production.sidorov.ivan.notekotlinmvp.di.component.DaggerAppComponent
 import com.production.sidorov.ivan.notekotlinmvp.di.module.AppModule

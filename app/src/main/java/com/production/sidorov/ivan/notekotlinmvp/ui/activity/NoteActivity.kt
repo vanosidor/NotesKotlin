@@ -14,13 +14,14 @@ import java.util.*
 
 class NoteActivity : MvpAppCompatActivity(), NoteView {
 
-
     @InjectPresenter
     lateinit var notePresenter: NotePresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_note)
+        setSupportActionBar(toolbar)
+
 
         val noteId = intent.getLongExtra(INTENT_NOTE_ID, -1)
 
@@ -40,6 +41,10 @@ class NoteActivity : MvpAppCompatActivity(), NoteView {
                 notePresenter.saveNote(newNote)
             }
         }
+
+        button_delete.setOnClickListener{
+            notePresenter.deleteNote(noteId)
+        }
     }
 
     override fun showMainView() {
@@ -50,5 +55,11 @@ class NoteActivity : MvpAppCompatActivity(), NoteView {
     override fun setNoteView(note: Note) {
         title_et.setText(note.title)
         text_et.setText(note.text)
+    }
+
+    override fun deleteNote() {
+        //Toast.makeText(this,"Note deleted",Toast.LENGTH_LONG).show()
+        intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
     }
 }

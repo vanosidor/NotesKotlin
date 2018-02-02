@@ -39,6 +39,19 @@ class MainPresenter @Inject constructor()   : MvpPresenter<MainView>() {
         viewState.showNoteView(id)
     }
 
+    fun delete(itemCount: Int){
+        if(itemCount==0) viewState.showNotDeleteNotification()
+        else viewState.showDialogDeleteAll()
+    }
+
+    fun deleteFromDatabase(){
+        Single.fromCallable { noteDao.deleteAllNotes() }
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeBy (onSuccess = {viewState.deleteAllNotes()})
+        viewState.deleteAllNotes()
+    }
+
     private fun showNotes(notes: List<Note> ){
         if ( notes.isEmpty()) viewState.showEmptyNotes()
         else viewState.showNotes(notes)

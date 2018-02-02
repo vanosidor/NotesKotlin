@@ -50,11 +50,23 @@ class NotePresenter : MvpPresenter<NoteView>(){
     fun updateNote(id: Long, title: String, text: String){
         Single.fromCallable {
             noteDao.updateNote(id,title,text,Calendar.getInstance().time)
-        }.subscribeOn(Schedulers.io())
+        }
+                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeBy(
                         onSuccess ={viewState.showMainView()},
                         onError = {throwable -> throwable.printStackTrace()})
 
     }
+
+    fun deleteNote(noteId: Long){
+        Single.fromCallable {
+            noteDao.deleteNote(noteId)}
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeBy(
+                            onSuccess ={viewState.showMainView()},
+                            onError = {throwable -> throwable.printStackTrace()})
+        }
+
 }

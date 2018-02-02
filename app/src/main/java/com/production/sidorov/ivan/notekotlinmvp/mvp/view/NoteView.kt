@@ -10,4 +10,6 @@ interface NoteView : MvpView{
 
     fun setNoteView(note: Note)
 
+    fun deleteNote()
+
 }
